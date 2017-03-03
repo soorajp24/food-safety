@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bson.Document;
 
+import com.infinity.bo.Check;
 import com.infinity.dataaccess.FoodSafetyDAO;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -25,6 +26,10 @@ public class CheckService {
 		List <Document> checks = foodSafetyDAO.findChecks();
 		
 		return checks;
+	}
+	
+	public String saveCheck(Check check) {
+		return foodSafetyDAO.saveCheck(check);
 	}
 
 }
