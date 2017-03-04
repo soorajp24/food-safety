@@ -23,9 +23,9 @@ public class Check {
 	private String language;
 	
 	/*
-	 *  Change this to an array - Sub checks/items    Example is  "Yogurt, cookie dough etc."
+	 * Sub checks/items. Examples are "Yogurt, cookie dough etc."
 	 */
-	private String subChecks;
+	private String[] subChecks;
 	
 	/*
 	 * Critical limit. Example is "Greater than 4 degrees"
@@ -65,11 +65,11 @@ public class Check {
 		this.language = language;
 	}
 
-	public String getSubChecks() {
+	public String[] getSubChecks() {
 		return subChecks;
 	}
 
-	public void setSubChecks(String subChecks) {
+	public void setSubChecks(String[] subChecks) {
 		this.subChecks = subChecks;
 	}
 

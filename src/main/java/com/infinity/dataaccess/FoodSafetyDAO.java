@@ -1,6 +1,7 @@
 package com.infinity.dataaccess;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
@@ -31,9 +32,10 @@ public class FoodSafetyDAO {
     	Document checkToInsert = new Document("name", check.getName())
                 .append("department", check.getDepartment())
                 .append("language", check.getLanguage())
+                .append("subChecks", new ArrayList<String>(Arrays.asList(check.getSubChecks())))
                 .append("criticalLimit", check.getCriticalLimit())
                 .append("correctiveAction", check.getCorrectiveAction());
-
+    	
     	checksCollection.insertOne(checkToInsert);
 
     	return "";

@@ -15,24 +15,14 @@ public class CheckController {
 		// https://dzone.com/articles/building-simple-restful-api
 		get("/checks", (req, res) -> checkService.getAllChecks(), JsonUtil.json());
 		
-		// Routes defined using lambda expressions. Above code is the equivalent of:
-		
-		/* get("/users", 
-				new Route() {
-					public Object handle(Request request, Response response) {
-						// process request
-						return checkService.getAllChecks();
-					}
-				}
-		); */
-		
 		after((req, res) -> {
 			res.type("application/json");
 			});
 		
 		// https://sparktutorials.github.io/2015/04/03/spark-lombok-jackson-reduce-boilerplate.html
 		/*
-		 * {"name":"Dairy Freshness Check","department":"Dairy","language":"US-English","criticalLimit":"Appear stale","correctiveAction":"Remove"}
+		 * {"name":"Dairy Freshness Check","department":"Dairy","language":"US-English", "subChecks":["Yogurt", "Cookie"],
+		 * "criticalLimit":"Appear stale","correctiveAction":"Remove"}
 		 */
 		post("/checks", (request, response) -> {
 		    try {
