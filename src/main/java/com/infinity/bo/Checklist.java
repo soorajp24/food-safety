@@ -44,6 +44,9 @@ public class Checklist {
 	 */
 	private String createAlerts;
 	
+	/*
+	 * List of checks.
+	 */
 	private Check[] checks;
 
 	public String getName() {
