@@ -1,30 +1,22 @@
 package com.infinity.service;
 
-import java.util.List;
+import java.util.Set;
 
-import org.bson.Document;
-
-import com.infinity.bo.Check;
 import com.infinity.bo.Checklist;
 import com.infinity.dataaccess.FoodSafetyDAO;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
 
 public class ChecklistService {
 	
 	private final FoodSafetyDAO foodSafetyDAO;
 	
-	public ChecklistService() {
-		final MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost"));
-		final MongoDatabase foodSafetyDatabase = mongoClient.getDatabase("foodsafety");
-		foodSafetyDAO = new FoodSafetyDAO(foodSafetyDatabase);
+	public ChecklistService() {;
+		foodSafetyDAO = new FoodSafetyDAO();
 	}
 	
 	// returns a list of all checks
-	public List<Document> getAllChecklists() { 
+	public Set<Checklist> getAllChecklists() { 
 		
-		List <Document> checks = foodSafetyDAO.findChecklists();
+		Set<Checklist> checks = foodSafetyDAO.findChecklists();
 		
 		return checks;
 	}

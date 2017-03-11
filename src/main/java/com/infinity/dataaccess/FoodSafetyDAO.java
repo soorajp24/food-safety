@@ -1,63 +1,64 @@
 package com.infinity.dataaccess;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.bson.Document;
+import org.jongo.Jongo;
+import org.jongo.MongoCollection;
+import org.jongo.MongoCursor;
 
 import com.infinity.bo.Check;
 import com.infinity.bo.Checklist;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 public class FoodSafetyDAO {
 	
-	private final MongoCollection<Document> checksCollection;
+	MongoCollection jongoChecklistsCollection = null;
 	
-	private final MongoCollection<Document> checklistsCollection;
+	MongoCollection jongoChecksCollection = null;
 	
-    public FoodSafetyDAO(final MongoDatabase foodSafetyDatabase) {
-    	checksCollection = foodSafetyDatabase.getCollection("checks");
-    	checklistsCollection = foodSafetyDatabase.getCollection("checklists");
+    public FoodSafetyDAO() {
+    	
+    	final Jongo jongo = new Jongo(new MongoClient(new MongoClientURI("mongodb://localhost")).getDB("foodsafety"));
+    	jongoChecklistsCollection = jongo.getCollection("checklists");
+    	jongoChecksCollection = jongo.getCollection("checks");
     }
     
     
-    public List<Document> findChecks() {
-        return checksCollection.find().into(new ArrayList<Document>());
+    public Set<Check> findChecks() {
+
+    	MongoCursor<Check> checksCursor = jongoChecksCollection.find().as(Check.class);
+        Set<Check> checks = new HashSet<Check>();
+        for(Check check : checksCursor) {
+        	checks.add( check );
+        }
+        return checks;
+        
     }
     
     public String saveCheck(Check check) {
     	
-    	Document checkToInsert = new Document("name", check.getName())
-                .append("department", check.getDepartment())
-                .append("language", check.getLanguage())
-                .append("subChecks", new ArrayList<String>(Arrays.asList(check.getSubChecks())))
-                .append("criticalLimit", check.getCriticalLimit())
-                .append("correctiveAction", check.getCorrectiveAction());
-    	
-    	checksCollection.insertOne(checkToInsert);
+    	jongoChecksCollection.save(check);
 
     	return "";
         
     }
     
-    public List<Document> findChecklists() {
-        return checklistsCollection.find().into(new ArrayList<Document>());
+    public Set<Checklist> findChecklists() {
+    			
+    	MongoCursor<Checklist> checklistsCursor = jongoChecklistsCollection.find().as(Checklist.class);
+        Set<Checklist> checklists = new HashSet<Checklist>();
+        for(Checklist checklist : checklistsCursor) {
+        	checklists.add( checklist );
+        }
+        return checklists;
+   
     }
     
     public String saveChecklist(Checklist checklist) {
     	
-    	Document checklistToInsert = new Document("name", checklist.getName())
-                .append("completedBy", checklist.getCompletedBy())
-                .append("executionTime", checklist.getExecutionTime())
-                .append("frequency", checklist.getFrequency())
-                .append("department", checklist.getDepartment())
-                .append("autoSpawn", checklist.getAutoSpawn())
-                .append("action", checklist.getAction())
-                .append("createAlerts", checklist.getCreateAlerts());
-
-    	checklistsCollection.insertOne(checklistToInsert);
+    	jongoChecklistsCollection.save(checklist);
 
     	return "";
         
