@@ -1,11 +1,14 @@
 package com.infinity.bo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Check {
 	
 	/*
 	 * Unique identifier
 	 */
-	private Integer checkId;
+	@JsonProperty("_id")
+	private String checkId;
 	
 	/*
 	 * Name of the check. Example is "Dairy Temperature Check".
@@ -37,7 +40,7 @@ public class Check {
 	 */
 	private String correctiveAction;
 	
-	public Integer getCheckId() {
+	public String getCheckId() {
 		return checkId;
 	}
 
@@ -89,7 +92,7 @@ public class Check {
 		this.correctiveAction = correctiveAction;
 	}
 
-	public void setCheckId(Integer checkId) {
+	public void setCheckId(String checkId) {
 		this.checkId = checkId;
 	}
 

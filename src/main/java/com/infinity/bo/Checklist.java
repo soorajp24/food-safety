@@ -2,7 +2,15 @@ package com.infinity.bo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Checklist {
+	
+	/*
+	 * Unique identifier
+	 */
+	@JsonProperty("_id")
+    private String checklistId;
 	
 	/*
 	 * Name of the checklist. Example is "Frozen Temp Check"
@@ -120,6 +128,16 @@ public class Checklist {
 	public void setChecks(Check[] checks) {
 		this.checks = checks;
 	}
+
+	public String getChecklistId() {
+		return checklistId;
+	}
+
+	public void setChecklistId(String checklistId) {
+		this.checklistId = checklistId;
+	}
+	
+	
 
 
 }
