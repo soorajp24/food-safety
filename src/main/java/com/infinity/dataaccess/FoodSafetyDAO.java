@@ -3,6 +3,7 @@ package com.infinity.dataaccess;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
@@ -60,6 +61,13 @@ public class FoodSafetyDAO {
     	
     	jongoChecklistsCollection.save(checklist);
 
+    	return "";
+        
+    }
+    
+    public String updateChecklist(Checklist checklist) {
+    	
+    	jongoChecklistsCollection.update(new ObjectId(checklist.get_id())).with(checklist);
     	return "";
         
     }

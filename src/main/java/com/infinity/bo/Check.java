@@ -8,7 +8,7 @@ public class Check {
 	 * Unique identifier
 	 */
 	@JsonProperty("_id")
-	private String checkId;
+	private String _id;
 	
 	/*
 	 * Name of the check. Example is "Dairy Temperature Check".
@@ -39,10 +39,6 @@ public class Check {
 	 * Corrective action. Example is "Remove"
 	 */
 	private String correctiveAction;
-	
-	public String getCheckId() {
-		return checkId;
-	}
 
 	public String getName() {
 		return name;
@@ -92,8 +88,14 @@ public class Check {
 		this.correctiveAction = correctiveAction;
 	}
 
-	public void setCheckId(String checkId) {
-		this.checkId = checkId;
+	public String get_id() {
+		return _id;
 	}
+
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+
+	
 
 }

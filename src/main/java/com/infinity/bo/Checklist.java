@@ -10,7 +10,7 @@ public class Checklist {
 	 * Unique identifier
 	 */
 	@JsonProperty("_id")
-    private String checklistId;
+    private String _id;
 	
 	/*
 	 * Name of the checklist. Example is "Frozen Temp Check"
@@ -129,15 +129,13 @@ public class Checklist {
 		this.checks = checks;
 	}
 
-	public String getChecklistId() {
-		return checklistId;
+	public String get_id() {
+		return _id;
 	}
 
-	public void setChecklistId(String checklistId) {
-		this.checklistId = checklistId;
+	public void set_id(String _id) {
+		this._id = _id;
 	}
-	
-	
 
 
 }

@@ -24,5 +24,9 @@ public class ChecklistService {
 	public String saveChecklist(Checklist checklist) {
 		return foodSafetyDAO.saveChecklist(checklist);
 	}
+	
+	public String updateChecklist(Checklist checklist) {
+		return foodSafetyDAO.updateChecklist(checklist);
+	}
 
 }

@@ -3,6 +3,7 @@ package com.infinity.controller;
 import static spark.Spark.after;
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.Spark.put;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,6 +42,20 @@ public class ChecklistController {
 		        ObjectMapper mapper = new ObjectMapper();
 		        Checklist checklistRequest = mapper.readValue(request.body(), Checklist.class);
 		        String id = checklistService.saveChecklist(checklistRequest);
+		        response.status(200);
+		        response.type("application/json");
+		        return id;
+		    } catch (JsonParseException jpe) {
+		        response.status(400);
+		        return "";
+		    }
+		});
+		
+		put("/checklists", (request, response) -> {
+		    try {
+		        ObjectMapper mapper = new ObjectMapper();
+		        Checklist checklistRequest = mapper.readValue(request.body(), Checklist.class);
+		        String id = checklistService.updateChecklist(checklistRequest);
 		        response.status(200);
 		        response.type("application/json");
 		        return id;
